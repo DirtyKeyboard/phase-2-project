@@ -1,8 +1,41 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import { useParams } from 'react-router-dom'
+import RecipeCard from './RecipeCard';
+import { Card, Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 
 const RecipeList = () => {
+  
+  const {categoryId} = useParams()
+  const [foods, setFoods] = useState([])
+  const [loading, setLoading] = useState(true);
+  const API = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryId}`;
+  useEffect(() => {
+    async function fetchData()
+    {
+      const raw = await fetch(API)
+      const data = await raw.json()
+      setFoods(data.meals)
+      setLoading(false)
+    }
+    fetchData()
+  },[])
+  
+
   return (
-    <div>RecipeList</div>
+    <>
+    
+    <h1>Browsing All: {categoryId}</h1>
+    {loading ? <Segment>
+    <Dimmer active>
+      <Loader />
+    </Dimmer>
+    <Image src='/images/wireframe/short-paragraph.png' />
+    </Segment> :
+    <Card.Group>
+      {foods.map(el => (<RecipeCard key={el.idMeal}/>))}
+    </Card.Group>
+    }
+    </>
   )
 }
 
