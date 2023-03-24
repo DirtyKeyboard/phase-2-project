@@ -82,7 +82,7 @@ const RecipeDetails = ({recipeId}) => {
       <h2>Region: {info.strArea}</h2>
       <em><h4>Tags: {info.strTags ? info.strTags.replace(",",", ") : 'None'}</h4></em>
       <div>
-        <Button onClick={() => console.log('Clicked favorite for id: ' + info.idMeal)} color="yellow" icon labelPosition='left'>
+        <Button onClick={() => console.log('Clicked favorite for id: ' + info.idMeal)} color="yellow" icon labelPosition='left'> {/*Post favorites to local server [?]*/}
           <Icon name='star' />
           Add To Favorites
           </Button>
