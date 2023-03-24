@@ -20,7 +20,6 @@ const RecipeList = () => {
     }
     fetchData()
   },[])
-  
 
   return (
     <>

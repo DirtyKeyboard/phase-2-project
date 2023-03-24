@@ -64,7 +64,7 @@ function App() {
         <Route exact path="/" element={<h1>Landing Page</h1>} />
         <Route exact path="/browse" element={<CategoryFilter/>} />
         <Route exact path="/newrecipe" element={<FoodForm />} />
-        <Route exact path="/cart" element={<h1>Shopping Cart</h1>} />
+        <Route exact path="/favorites" element={<h1>Favs</h1>} />
         <Route exact path="/browse/:categoryId" element={<RecipeList/>} />
         <Route path="/browse/:categoryId/:mealId" element={<RecipeDetails/>} />
       </Routes>

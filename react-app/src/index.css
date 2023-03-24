@@ -6,3 +6,31 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+nav a.active {
+  color: rgb(0, 0, 0);
+}
+nav {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  background-color:rgb(223, 222, 222);
+}
+nav a {
+  margin:20px;
+  font-size: 22px;
+  color: rgb(58, 77, 241);
+}
+
+div.container {
+  text-align: center;
+}
+
+div.container li {
+  text-align: left;
+}
+
+.bigHeading
+{
+  font-size: 45px;
+}

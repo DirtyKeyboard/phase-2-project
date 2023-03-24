@@ -7,7 +7,7 @@ const NavBar = () => {
         <NavLink to="/">Home</NavLink>
         <NavLink to="/browse">Browse Recipes</NavLink>
         <NavLink to="/newrecipe">New Recipe</NavLink>
-        <NavLink to="/cart">View Cart</NavLink>
+        <NavLink to="/favorites">View Favorites</NavLink>
     </nav>
   )
 }
