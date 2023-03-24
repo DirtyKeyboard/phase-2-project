@@ -1,22 +1,24 @@
 import React from 'react'
 import { Card, Image } from 'semantic-ui-react'
+import {useNavigate, useParams} from 'react-router-dom'
 
-const RecipeCard = () => {
+const RecipeCard = ({recipe}) => {
+  const navigate = useNavigate()
+  const params = useParams()
+  const {strMealThumb, strMeal, idMeal} = recipe
+
+  function handleClick()
+  {
+    // idMeal
+    // params.categoryId
+    navigate(`/browse/${params.categoryId}/${idMeal}`)
+  }
   return (
-    <Card>
-    <Image src='/images/avatar/large/matthew.png' wrapped ui={false} />
+    <Card onClick={handleClick}>
+    <Image src={strMealThumb} wrapped ui={false} />
     <Card.Content>
-      <Card.Header>Chicken Pot Pie</Card.Header>
-      <Card.Meta>
-        <span className='date'>Dinner</span>
-      </Card.Meta>
-      <Card.Description>
-        Chicken, Pot, Pie
-      </Card.Description>
-    </Card.Content>
-    <Card.Content extra>
-       Area • Tags
-    </Card.Content>
+      <Card.Header>{strMeal}</Card.Header>
+      </Card.Content>
   </Card>
   )
 }

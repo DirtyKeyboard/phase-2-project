@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import RecipeCard from './RecipeCard';
-import { Card, Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
+import LoadingBar from './LoadingBar'
 
 const RecipeList = () => {
   
@@ -25,14 +26,9 @@ const RecipeList = () => {
     <>
     
     <h1>Browsing All: {categoryId}</h1>
-    {loading ? <Segment>
-    <Dimmer active>
-      <Loader />
-    </Dimmer>
-    <Image src='/images/wireframe/short-paragraph.png' />
-    </Segment> :
+    {loading ? <LoadingBar />:
     <Card.Group>
-      {foods.map(el => (<RecipeCard key={el.idMeal}/>))}
+      {foods.map(el => (<RecipeCard key={el.idMeal} recipe={el}/>))}
     </Card.Group>
     }
     </>

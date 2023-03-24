@@ -14,7 +14,6 @@ const CategoryFilter = () => {
         }
         fetchData()
     },[])
-    console.log(cats)
   return (
     <Card.Group>
         {cats.map(el => (<CategoryCard key={el.idCategory} category={el}/>) )}
