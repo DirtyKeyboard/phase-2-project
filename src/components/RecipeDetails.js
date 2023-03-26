@@ -70,7 +70,10 @@ const RecipeDetails = ({recipeId}) => {
     {loading ? 
     <>
       <LoadingBar /> 
-      <Button onClick={() => navigate(`/browse/${params.categoryId}`)}>Go Back</Button>
+      <Button onClick={() => navigate(`/browse/${params.categoryId}`)} color="red" icon labelPosition='red'>
+          <Icon name='left arrow' />
+          Go Back
+        </Button>
     </>
     : 
     <div className='container'>
