@@ -25,7 +25,7 @@ const FoodForm = () => {
   function handleSubmit(e) {
     e.preventDefault()
 
-    const API = 'http://localhost:3001/meals'
+    const API = 'http://localhost:4000/meals'
     async function fetchData() {
       const settings = {
         method: 'POST',

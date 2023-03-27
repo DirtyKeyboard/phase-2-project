@@ -1,29 +1,4 @@
 {
-  "meals": [
-    {
-      "strMeal": "sds",
-      "strMealThumb": "sds",
-      "strYoutube": "sds",
-      "strTags": "sds",
-      "strArea": "dsds",
-      "strCategory": "sdsds",
-      "strInstructions": "sdsd",
-      "strMeasure1": "sds",
-      "strIngredient1": "dsd",
-      "id": 1
-    },
-    {
-      "strMeal": "fdfdsg",
-      "strMealThumb": "fgdsfgds",
-      "strYoutube": "fdf",
-      "strTags": "fdsg",
-      "strArea": "fdsg",
-      "strCategory": "sdfg",
-      "strInstructions": "fdsg",
-      "strMeasure1": "fdsg",
-      "strIngredient1": "fdsg",
-      "id": 2
-    }
-  ]
+  "meals": [],
   "favorites": []
 }
