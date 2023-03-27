@@ -3,26 +3,27 @@ import {
   Form,
   Input,
   TextArea,
-  Button,
-  Message
+  Button
 } from 'semantic-ui-react'
 import RecipeCard from './RecipeCard'
 
 // class FoodForm extends Component {
 const FoodForm = () => {
-
+  const [counter, setCounter] = useState(1);
   const [formData, setFormData] = useState({
-    strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '', strMeasure1: '', strIngredient1: ''  })
+    strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '' })
 
-  function handleChange(e) {
+  function addFormFields(e) {
+    e.stopPropagation()
+    setCounter(counter + 1);
+  }
+
+ function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-
   function handleSubmit(e) {
     e.preventDefault()
-
-    console.log(formData)
 
     const API = 'http://localhost:3001/meals'
     async function fetchData() {
@@ -32,7 +33,7 @@ const FoodForm = () => {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify( formData)
       };
       const raw = await fetch(API, settings)
       const data = await raw.json()
@@ -41,17 +42,11 @@ const FoodForm = () => {
     }
     fetchData()
 
-    setFormData({ strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '', strMeasure1: '', strIngredient1: '' })
+    setFormData({ strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '',strMeasure1:'',strIngredient1:'' })
+    setCounter(1)
   }
 
-  const [counter, setCounter] = useState(1);
-
-  function addFormFields(e) {
-    e.stopPropagation()
-    setCounter(counter + 1);
-  }
-
-
+  
   return (
     <>
     <Form onSubmit={handleSubmit}  >
@@ -87,21 +82,21 @@ const FoodForm = () => {
         <Button type="button" onClick={addFormFields}>+</Button>
         {Array.from(Array(counter)).map((c, index) => {
           return (
-            <Form.Group inline  >
+            <Form.Group inline key={index} >
               <Form.Field
                 control={Input}
                 name={'strMeasure' + (index + 1)}
                 label='Quantity'
                 placeholder='Ingredient Quantity'
-                value={formData[`strMeasure${counter+1}`]}
-                onChange={handleChange}
+                value={formData[`strMeasure${index+1}`]|| ""}
+                onChange={ handleChange}
               />
               <Form.Field
                 control={Input}
                 name={'strIngredient' + (index + 1)}
                 label='Ingredient'
                 placeholder='Ingredient'
-                value={formData[`strIngredient${counter+1}`]}
+                value={formData[`strIngredient${index+1}`]|| ""}
                 onChange={handleChange}
               />
             </Form.Group>
