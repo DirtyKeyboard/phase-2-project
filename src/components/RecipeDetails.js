@@ -4,15 +4,15 @@ import {useNavigate, useParams} from 'react-router-dom'
 import LoadingBar from './LoadingBar'
 import {v4 as uuidv4} from 'uuid';
 
-const RecipeDetails = ({recipeId, goBack}) => {
+const RecipeDetails = ({goBack, setCurrentCat}) => {
   const [favorites, setFavorites] = useState([])
   const [showVideo, setShowVideo] = useState(true)
   const [info, setInfo] = useState({})
   const [loading, setLoading] = useState(true)
-  const navigate = useNavigate()
   const params = useParams()
   const API =  `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.mealId}`
   const DB = 'http://localhost:4000/favorites'
+  setCurrentCat(params.categoryId)
   useEffect(() => {
     async function fetchData()
     {
@@ -73,7 +73,7 @@ const RecipeDetails = ({recipeId, goBack}) => {
 
   let isThisAFavorite = false;
   favorites.forEach(el => {
-    if (el.foodId === info.idMeal)
+    if (el.idMeal === info.idMeal)
       isThisAFavorite = true;
   })
 
@@ -83,33 +83,29 @@ const RecipeDetails = ({recipeId, goBack}) => {
     //check if using isFavorite === true will work vvv
     if (!isThisAFavorite)
     {
-      const newFav = {foodId: info.idMeal}
+      const newFav = {idMeal: info.idMeal, strMeal: info.strMeal, strMealThumb: info.strMealThumb} //HANDLES ADDING NEW OBJECTS
       const resp = await fetch(DB, {method:'POST', headers:{"Content-Type": "application/json"}, body: JSON.stringify(newFav)})
       const respJson = await resp.json()
       setFavorites([...favorites, respJson])
-      
     }
     else
     {
       let idToRemove = -1;
       favorites.forEach(el => {
-        if (el.foodId === info.idMeal)
+        if (el.idMeal === info.idMeal)
           idToRemove = el.id;
       })
-      console.log(idToRemove)
       await fetch(DB+`/${idToRemove}`, {method: 'DELETE'})
-      const newFavorites = favorites.filter(el => (el.foodId !== info.idMeal))
+      const newFavorites = favorites.filter(el => (el.idMeal !== info.idMeal))
       setFavorites(newFavorites)
     }
   }
- 
-  console.log(isThisAFavorite)
   return (
     <>
     {loading ? 
     <>
       <LoadingBar /> 
-      <Button onClick={() => navigate(`/browse/${params.categoryId}`)} color="red" icon labelPosition='left'>
+      <Button onClick={goBack} color="red" icon labelPosition='left'>
           <Icon name='left arrow' />
           Go Back
         </Button>
@@ -134,7 +130,7 @@ const RecipeDetails = ({recipeId, goBack}) => {
         Add To Favorites
         </Button>}
         
-        <Button onClick={goBack ? goBack : () => navigate(`/browse/${params.categoryId}`)} color="red" icon labelPosition='left'>
+        <Button onClick={goBack} color="red" icon labelPosition='left'>
           <Icon name='left arrow' />
           Go Back
         </Button>
