@@ -1,22 +1,28 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import {
   Form,
   Input,
   TextArea,
+  Button,
   Message
 } from 'semantic-ui-react'
+import RecipeCard from './RecipeCard'
 
-class FoodForm extends Component {
+// class FoodForm extends Component {
+const FoodForm = () => {
 
-  state = { strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '', strMeasure1: '', strIngredient1: '' }
+  const [formData, setFormData] = useState({
+    strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '', strMeasure1: '', strIngredient1: ''  })
 
-  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
-  handleSubmit = () => {
-    const { strMeal, strMealThumb, strYoutube, strTags, strArea, strCategory, strInstructions, strMeasure1, strIngredient1 } = this.state
 
-    this.setState({ strMeal, strCategory, strArea, strInstructions, strMealThumb, strTags, strYoutube, strIngredient1, strMeasure1 })
-    const newRecipe = this.state
+  function handleSubmit(e) {
+    e.preventDefault()
+
+    console.log(formData)
 
     const API = 'http://localhost:3001/meals'
     async function fetchData() {
@@ -26,7 +32,7 @@ class FoodForm extends Component {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newRecipe)
+        body: JSON.stringify(formData)
       };
       const raw = await fetch(API, settings)
       const data = await raw.json()
@@ -35,118 +41,123 @@ class FoodForm extends Component {
     }
     fetchData()
 
-    this.setState({ strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '', strMeasure1: '', strIngredient1: '' })
-
-
+    setFormData({ strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '', strMeasure1: '', strIngredient1: '' })
   }
 
-  handleClick = (e) =>
-    alert('clicked add more ingredients.. finish handler!')
+  const [counter, setCounter] = useState(1);
 
-  render() {
-    const { strMeal, strCategory, strArea, strInstructions, strMealThumb, strTags, strYoutube, strIngredient1, strMeasure1 } = this.state
+  function addFormFields(e) {
+    e.stopPropagation()
+    setCounter(counter + 1);
+  }
 
-    return (
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Input required
-          // control={Input}
-          name='strMeal'
-          label='Recipe Title'
-          placeholder='Recipe Title'
-          value={strMeal}
-          onChange={this.handleChange}
-        />
-        <Form.Group widths='equal'>
-          <Form.Field
-            control={Input}
-            name='strMealThumb'
-            label='Image'
-            placeholder='Recipe Image URL'
-            value={strMealThumb}
-            onChange={this.handleChange}
-          />
-          <Form.Field
-            control={Input}
-            name='strYoutube'
-            label='YouTube Video'
-            placeholder='Recipe YouTube Video URL'
-            value={strYoutube}
-            onChange={this.handleChange}
-          />
-        </Form.Group>
-        <Form.Group widths='equal' grouped >
-          <label>Ingredients</label>
-          <Form.Group inline >
-            <Form.Field
-              control={Input}
-              name='strMeasure1'
-              label='Quantity'
-              placeholder='Ingredient Quantity'
-              value={strMeasure1}
-              onChange={this.handleChange}
-            />
-            <Form.Field
-              control={Input}
-              name='strIngredient1'
-              label='Ingredient'
-              placeholder='Ingredient'
-              value={strIngredient1}
-              onChange={this.handleChange}
-            />
-            <button
-              class="ui button"
-              onClick={this.handleClick}
-            >+</button>
-          </Form.Group>
-        </Form.Group>
+
+  return (
+    <>
+    <Form onSubmit={handleSubmit}  >
+      <Form.Field
+        required
+        control={Input}
+        name='strMeal'
+        label='Recipe Title'
+        placeholder='Recipe Title'
+        value={formData.strMeal}
+        onChange={handleChange}
+      />
+      <Form.Group widths='equal'>
         <Form.Field
-          control={TextArea}
-          name='strInstructions'
-          label='Instructions'
-          placeholder='Recipe instructions...'
-          value={strInstructions}
-          onChange={this.handleChange}
+          control={Input}
+          name='strMealThumb'
+          label='Image'
+          placeholder='Recipe Image URL'
+          value={formData.strMealThumb}
+          onChange={handleChange}
         />
-        <Form.Group grouped >
-          <Form.Field inline
-            control={Input}
-            name='strCategory'
-            label='Category'
-            placeholder='Category'
-            value={strCategory}
-            onChange={this.handleChange}
-          />
-          <Form.Field inline
-            control={Input}
-            name='strArea'
-            label='Region'
-            placeholder='Region'
-            value={strArea}
-            onChange={this.handleChange}
-          />
-          <Input
-            name='strTags'
-            icon='tags'
-            iconPosition='left'
-            label={{ tag: true, content: 'Add Tags' }}
-            labelPosition='right'
-            placeholder='Enter tags'
-            value={strTags}
-            onChange={this.handleChange}
-          />
-        </Form.Group>
-        <Message
-          success
-          header='Form Completed'
-          content="Your new recipe has been added"
+        <Form.Field
+          control={Input}
+          name='strYoutube'
+          label='YouTube Video'
+          placeholder='Recipe YouTube Video URL'
+          value={formData.strYoutube}
+          onChange={handleChange}
         />
-        <Form.Button content='Submit' />
-      </Form>
+      </Form.Group>
+      <Form.Group widths='equal' grouped >
+        <label>Ingredients</label>
+        <Button type="button" onClick={addFormFields}>+</Button>
+        {Array.from(Array(counter)).map((c, index) => {
+          return (
+            <Form.Group inline  >
+              <Form.Field
+                control={Input}
+                name={'strMeasure' + (index + 1)}
+                label='Quantity'
+                placeholder='Ingredient Quantity'
+                value={formData[`strMeasure${counter+1}`]}
+                onChange={handleChange}
+              />
+              <Form.Field
+                control={Input}
+                name={'strIngredient' + (index + 1)}
+                label='Ingredient'
+                placeholder='Ingredient'
+                value={formData[`strIngredient${counter+1}`]}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          );
+        })}
+      </Form.Group>
+      <Form.Field
+        required
+        control={TextArea}
+        name='strInstructions'
+        label='Instructions'
+        placeholder='Recipe instructions...'
+        value={formData.strInstructions}
+        onChange={handleChange}
+      />
+      <Form.Group grouped >
+        <Form.Field inline
+          required
+          control={Input}
+          name='strCategory'
+          label='Category'
+          placeholder='Category'
+          value={formData.strCategory}
+          onChange={handleChange}
+        />
+        <Form.Field inline
+          control={Input}
+          name='strArea'
+          label='Region'
+          placeholder='Region'
+          value={formData.strArea}
+          onChange={handleChange}
+        />
+        <Input
+          name='strTags'
+          icon='tags'
+          iconPosition='left'
+          label={{ tag: true, content: 'Tags' }}
+          labelPosition='right'
+          placeholder='Enter comma delimited tags'
+          value={formData.strTags}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      
+      <Button type='submit'>Submit</Button>
+    </Form>
 
+<div>
+  <RecipeCard recipe={formData}/>
+</div>
 
-    )
-  }
+</>
+  )
 }
+
 
 
 export default FoodForm
