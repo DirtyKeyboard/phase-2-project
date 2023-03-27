@@ -18,6 +18,14 @@ const FoodForm = () => {
     setCounter(counter + 1);
   }
 
+  function subtractFormFields(e) {
+    if (counter > 1)
+    {
+      e.stopPropagation()
+      setCounter(counter - 1);
+    }
+  }
+
  function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -80,6 +88,7 @@ const FoodForm = () => {
       <Form.Group widths='equal' grouped >
         <label>Ingredients</label>
         <Button type="button" onClick={addFormFields}>+</Button>
+        <Button type="button" onClick={subtractFormFields}>-</Button>
         {Array.from(Array(counter)).map((c, index) => {
           return (
             <Form.Group inline key={index} >
@@ -146,7 +155,7 @@ const FoodForm = () => {
     </Form>
 
 <div>
-  <RecipeCard recipe={formData}/>
+  <RecipeCard recipe={formData} handleClick={() => console.log('Clicked demo card!')}/>
 </div>
 
 </>
