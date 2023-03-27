@@ -23,8 +23,9 @@ const FavoriteList = () => {
   return (
     <>
     <h1>Favorites</h1>
+    {loading? <LoadingBar /> : null}
     <Card.Group>
-      {loading ? <LoadingBar /> :
+      {loading ? null :
       data.map(el => (<RecipeCard key={el.id} recipe={el}
       handleClick={() => navigate(`/favorites/${el.idMeal}`)}/>))
       }
