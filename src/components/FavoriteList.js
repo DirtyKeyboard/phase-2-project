@@ -2,16 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import LoadingBar from './LoadingBar';
 import RecipeCard from './RecipeCard';
-import {v4 as uuidv4} from 'uuid';
 import { Card } from 'semantic-ui-react';
 
 const FavoriteList = () => {
-  /*
-    RecipeCard takes handleClick prop, that describes click action
-    RecipeDetails takes goBack prop, goBack = navigate('/favorites')
-  */
-  //const API =  `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${data[index].foodId}`
-  
   const API =  'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
   const navigate = useNavigate() 
   const DB = "http://localhost:4000/favorites"

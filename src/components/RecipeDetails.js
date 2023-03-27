@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Button, Image, Divider, Segment, Icon} from 'semantic-ui-react'
-import {useNavigate, useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import LoadingBar from './LoadingBar'
 import {v4 as uuidv4} from 'uuid';
 
@@ -45,25 +45,6 @@ const RecipeDetails = ({goBack, setCurrentCat}) => {
   
 }
 
-
-
-
-  // ingredients.push(info.strMeasure1 + " of " + info.strIngredient1)
-  // ingredients.push(info.strMeasure2 + " of " + info.strIngredient2)
-  // ingredients.push(info.strMeasure3 + " of " + info.strIngredient3)
-  // ingredients.push(info.strMeasure4 + " of " + info.strIngredient4)
-  // ingredients.push(info.strMeasure5 + " of " + info.strIngredient5)
-  // ingredients.push(info.strMeasure6 + " of " + info.strIngredient6)
-  // ingredients.push(info.strMeasure7 + " of " + info.strIngredient7)
-  // ingredients.push(info.strMeasure8 + " of " + info.strIngredient8)
-  // ingredients.push(info.strMeasure9 + " of " + info.strIngredient9)
-  // ingredients.push(info.strMeasure10 + " of " + info.strIngredient10)
-  // ingredients.push(info.strMeasure11 + " of " + info.strIngredient11)
-  // ingredients.push(info.strMeasure12 + " of " + info.strIngredient12)
-  // ingredients.push(info.strMeasure13 + " of " + info.strIngredient13)
-  // ingredients.push(info.strMeasure14 + " of " + info.strIngredient14)
-  // ingredients.push(info.strMeasure15 + " of " + info.strIngredient15)
-
   function getLink()
   {
     const b = info.strYoutube.indexOf('=') + 1
@@ -79,8 +60,6 @@ const RecipeDetails = ({goBack, setCurrentCat}) => {
 
   async function handleFavorite()
   {
-    //setFavorites([]), favorites=[] state, DB=dblink.json
-    //check if using isFavorite === true will work vvv
     if (!isThisAFavorite)
     {
       const newFav = {idMeal: info.idMeal, strMeal: info.strMeal, strMealThumb: info.strMealThumb} //HANDLES ADDING NEW OBJECTS
