@@ -1,11 +1,10 @@
-import {useState} from 'react'
 import NavBar from './NavBar'
 import FoodForm from './FoodForm';
-import RecipeList from './RecipeList'
-import RecipeDetails from './RecipeDetails' //Clicking on a recipe card routes to it's details
-import ShoppingCart from './ShoppingCart';
-import CategoryFilter from './CategoryFilter'
-import {Route, Routes, useParams} from "react-router-dom"
+import RecipeList from './RecipeList';
+import RecipeDetails from './RecipeDetails';
+import FavoriteList from './FavoriteList';
+import CategoryFilter from './CategoryFilter';
+import {Route, Routes, useParams} from "react-router-dom";
 
 /*
 API NOTES
@@ -64,9 +63,9 @@ function App() {
         <Route exact path="/" element={<h1>Landing Page</h1>} />
         <Route exact path="/browse" element={<CategoryFilter/>} />
         <Route exact path="/newrecipe" element={<FoodForm />} />
-        <Route exact path="/favorites" element={<h1>Favs</h1>} />
+        <Route exact path="/favorites" element={<FavoriteList />} />
         <Route exact path="/browse/:categoryId" element={<RecipeList/>} />
-        <Route path="/browse/:categoryId/:mealId" element={<RecipeDetails/>} />
+        <Route path="/browse/:categoryId/:mealId" element={<RecipeDetails />} />
       </Routes>
     </div>
   );
