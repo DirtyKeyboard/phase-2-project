@@ -3,12 +3,85 @@ import {
   Form,
   Input,
   TextArea,
-  Button
+  Button,
+  Select
 } from 'semantic-ui-react'
 import RecipeCard from './RecipeCard'
 
 // class FoodForm extends Component {
 const FoodForm = () => {
+  const categoryOptions = [
+    {
+      key: 'beef',
+      text: 'beef',
+      value: 'beef'
+    },
+    {
+      key: 'chicken',
+      text: 'chicken',
+      value: 'chicken'
+    },
+    {
+      key: 'dessert',
+      text: 'dessert',
+      value: 'dessert'
+    },
+    {
+      key: 'lamb',
+      text: 'lamb',
+      value: 'lamb'
+    },
+    {
+      key: 'miscellaneous',
+      text: 'miscellaneous',
+      value: 'miscellaneous'
+    },
+    {
+      key: 'pasta',
+      text: 'pasta',
+      value: 'pasta'
+    },
+    {
+      key: 'pork',
+      text: 'pork',
+      value: 'pork'
+    },
+    {
+      key: 'seafood',
+      text: 'seafood',
+      value: 'seafood'
+    },
+    {
+      key: 'side',
+      text: 'side',
+      value: 'side'
+    },
+    {
+      key: 'starter',
+      text: 'starter',
+      value: 'starter'
+    },
+    {
+      key: 'vegan',
+      text: 'vegan',
+      value: 'vegan'
+    },
+    {
+      key: 'vegetarian',
+      text: 'vegetarian',
+      value: 'vegetarian'
+    },
+    {
+      key: 'breakfast',
+      text: 'breakfast',
+      value: 'breakfast'
+    },
+    {
+      key: 'goat',
+      text: 'goat',
+      value: 'goat'
+    }
+  ]
   const [counter, setCounter] = useState(1);
   const [formData, setFormData] = useState({
     strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '' })
@@ -30,31 +103,38 @@ const FoodForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  function handleSubmit(e) {
-    e.preventDefault()
-
-    const API = 'http://localhost:4000/meals'
-    async function fetchData() {
-      const settings = {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify( formData)
-      };
-      const raw = await fetch(API, settings)
-      const data = await raw.json()
-      // setCats(data.categories)
-      return data
-    }
-    fetchData()
-
-    setFormData({ strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '',strMeasure1:'',strIngredient1:'' })
-    setCounter(1)
+  function handleDropChange(e) {
+    setFormData({...formData, strCategory: e.target.childNodes[0].innerText})
   }
 
+  function handleSubmit(e) {
+    e.preventDefault()
+    if (formData.strCategory !== '')
+    {
+      const API = 'http://localhost:4000/meals'
+      async function fetchData() {
+        const settings = {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify( formData)
+        };
+        const raw = await fetch(API, settings)
+        const data = await raw.json()
+        return data
+      }
+      fetchData()
   
+      setFormData({ strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '',strMeasure1:'',strIngredient1:'' })
+      setCounter(1)
+    }
+    else
+      alert('Please select a category')
+  }
+
+
   return (
     <>
     <Form onSubmit={handleSubmit}  >
@@ -122,14 +202,11 @@ const FoodForm = () => {
         onChange={handleChange}
       />
       <Form.Group grouped >
-        <Form.Field inline
-          required
-          control={Input}
-          name='strCategory'
-          label='Category'
-          placeholder='Category'
+            <Select
+          placeholder='Select Category'
+          options={categoryOptions}
+          onChange={handleDropChange}
           value={formData.strCategory}
-          onChange={handleChange}
         />
         <Form.Field inline
           control={Input}
