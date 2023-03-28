@@ -76,7 +76,7 @@ const RecipeDetails = ({goBack, setCurrentCat}) => {
     }
   }
   return (
-    <>
+    <Container verticalAlign='middle' style={{ margin: '5em 0 0 0', padding: '0 0 5em  0' }}  >
     {loading ? 
     <>
       <LoadingBar /> 
@@ -86,7 +86,6 @@ const RecipeDetails = ({goBack, setCurrentCat}) => {
         </Button>
     </>
     : 
-    <Container verticalAlign='middle' style={{ margin: '5em 0 0 0', padding: '0 0 5em  0' }}  >
    
     <div className='container'>
       <Header as='h1' textAlign='center'>{info.strMeal}</Header>
@@ -124,9 +123,9 @@ const RecipeDetails = ({goBack, setCurrentCat}) => {
         <p>{info.strInstructions}</p>
       </Container>
     </div>
-    </Container>
+
     }
-    </>
+    </Container>
   )
 }
 

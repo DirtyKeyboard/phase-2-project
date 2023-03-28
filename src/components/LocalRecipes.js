@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import { Card, Message } from 'semantic-ui-react'
+import { Card, Message, Container, Header } from 'semantic-ui-react'
 import LocalCard from './LocalCard'
 
+////<Container verticalAlign='middle' style={{ margin: '5em 0 0 0', padding: '0 0 5em  0' }}  >
+//<Header as='h1' textAlign='left'>
 const LocalRecipes = () => {
     const LOCAL = "http://localhost:4000/meals"
     const [foods, setFoods] = useState([])
@@ -20,8 +22,8 @@ const LocalRecipes = () => {
         setFoods(newFoods)
     }
   return (
-    <>
-    <h1>Your Recipes</h1>
+    <Container verticalAlign='middle' style={{ margin: '5em 0 0 0', padding: '0 0 5em  0' }}  >
+    <Header as='h1' textAlign='left'>Your Recipes</Header>
     <Card.Group>
         {foods.map(el => (<LocalCard key={el.id} recipe={el} deleteFood={deleteFood}/>))}
         {foods.length === 0 ? <Message>
@@ -31,7 +33,7 @@ const LocalRecipes = () => {
             </p>
           </Message> : null}
     </Card.Group>
-    </>
+    </Container>
   )
 }
 

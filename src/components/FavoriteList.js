@@ -29,6 +29,13 @@ const FavoriteList = () => {
           data.map(el => (<RecipeCard key={el.id} recipe={el}
             handleClick={() => navigate(`/favorites/${el.idMeal}`)} />))
         }
+         {data.length === 0 ? <Message>
+            <Message.Header>Nothing to show!</Message.Header>
+            <p>
+              It looks like you don't have any recipes favorited, to view our recipes, you can click <a href="/browse">here</a>
+            </p>
+          </Message>
+          : null}
       </Card.Group>
     </Container>
   )

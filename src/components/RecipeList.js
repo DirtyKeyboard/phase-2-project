@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import RecipeCard from './RecipeCard';
-import { Card, Form, Input, TextArea, Button, Container, Header } from 'semantic-ui-react'
+import { Card, Container, Header } from 'semantic-ui-react'
 import LoadingBar from './LoadingBar'
 
 const RecipeList = () => {
@@ -12,8 +12,6 @@ const RecipeList = () => {
   const API = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryId}`;
   useEffect(() => {
     async function fetchData() {
-      const localRaw = await fetch(LOCALDB)
-      const localData = await localRaw.json()
       const raw = await fetch(API)
       const data = await raw.json()
       setFoods(data.meals)
@@ -28,7 +26,6 @@ const RecipeList = () => {
       <Header as='h1' textAlign='left'>Browsing All: {categoryId}</Header>
       {loading ? <LoadingBar /> :
         <Card.Group centered itemsPerRow={4} stackable>
-          {localFoods.map(el => (<RecipeCard key={el.idMeal} recipe={el} handleClick={() => alert('hi')} />))}
           {foods.map(el => (<RecipeCard key={el.idMeal} recipe={el} />))}
         </Card.Group>
       }

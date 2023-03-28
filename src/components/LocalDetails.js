@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import LoadingBar from './LoadingBar'
-import {Button, Icon, Image, Segment, Divider} from 'semantic-ui-react'
+import {Button, Icon, Image, Segment, Divider, Container, Header} from 'semantic-ui-react'
 import {v4 as uuidv4} from 'uuid'
 
+//<Container verticalAlign='middle' style={{ margin: '5em 0 0 0', padding: '0 0 5em  0' }}  >
+//<Header as='h1' textAlign='left'>
 const LocalDetails = () => {
     const [loading, setLoading] = useState(true)
     const [info, setInfo] = useState({})
@@ -43,7 +45,7 @@ const LocalDetails = () => {
       done = true;
   }
   return (
-    <>
+    <Container verticalAlign='middle' style={{ margin: '5em 0 0 0', padding: '0 0 5em  0' }}  >
         {loading ? 
         <>
         <LoadingBar /> 
@@ -81,7 +83,7 @@ const LocalDetails = () => {
     </div>
             
         }
-    </>
+    </Container>
   )
 }
 
