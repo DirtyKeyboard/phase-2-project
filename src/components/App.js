@@ -41,6 +41,8 @@ function App() {
         <Route exact path="/browse/:categoryId" element={<RecipeList />} />
         <Route path="/browse/:categoryId/:mealId" element={<RecipeDetails setCurrentCat={setCurrentCat} goBack={() => navigate(`/browse/${currentCat}`)} />} />
         <Route path="/favorites/:mealId" element={<RecipeDetails setCurrentCat={(r) => { }} goBack={() => navigate(`/favorites`)} />} />
+        <Route exact path="/local" element={<LocalRecipes />}/>
+        <Route exact path="/local/:mealId" element={<LocalDetails />}/>
       </Routes>
     </div>
   );

@@ -40,10 +40,6 @@ const RecipeDetails = ({goBack, setCurrentCat}) => {
     else
       done = true;
   }
-  if (!loading)
-{  
-  
-}
 
   function getLink()
   {
