@@ -6,7 +6,8 @@ import RecipeDetails from './RecipeDetails';
 import FavoriteList from './FavoriteList';
 import CategoryFilter from './CategoryFilter';
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
-
+import LocalRecipes from './LocalRecipes'
+import LocalDetails from './LocalDetails';
 
 function App() {
   const navigate = useNavigate()
@@ -34,6 +35,8 @@ function App() {
         <Route exact path="/browse/:categoryId" element={<RecipeList />} />
         <Route path="/browse/:categoryId/:mealId" element={<RecipeDetails setCurrentCat={setCurrentCat} goBack={() => navigate(`/browse/${currentCat}`)} />} />
         <Route path="/favorites/:mealId" element={<RecipeDetails setCurrentCat={(r) => { }} goBack={() => navigate(`/favorites`)} />} />
+        <Route exact path="/local" element={<LocalRecipes />}/>
+        <Route exact path="/local/:mealId" element={<LocalDetails />}/>
       </Routes>
     </div>
   );
