@@ -8,7 +8,7 @@ const RecipeCard = ({recipe, handleClick}) => {
   const {strMealThumb, strMeal, idMeal} = recipe
   
   return (
-    <Card onClick={handleClick ? handleClick : () => navigate(`/browse/${params.categoryId}/${idMeal}`)}>
+    <Card onClick={() => navigate(`/browse/${params.categoryId}/${idMeal}`)}>
     <Image src={strMealThumb} wrapped ui={false} />
     <Card.Content>
       <Card.Header>{strMeal}</Card.Header>

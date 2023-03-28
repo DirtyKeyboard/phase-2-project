@@ -58,7 +58,7 @@ const RecipeDetails = ({goBack, setCurrentCat}) => {
   {
     if (!isThisAFavorite)
     {
-      const newFav = {idMeal: info.idMeal, strMeal: info.strMeal, strMealThumb: info.strMealThumb} //HANDLES ADDING NEW OBJECTS
+      const newFav = {idMeal: info.idMeal, strMeal: info.strMeal, strMealThumb: info.strMealThumb}
       const resp = await fetch(DB, {method:'POST', headers:{"Content-Type": "application/json"}, body: JSON.stringify(newFav)})
       const respJson = await resp.json()
       setFavorites([...favorites, respJson])
