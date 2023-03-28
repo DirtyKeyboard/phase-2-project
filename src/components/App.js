@@ -5,8 +5,8 @@ import RecipeList from './RecipeList';
 import RecipeDetails from './RecipeDetails';
 import FavoriteList from './FavoriteList';
 import CategoryFilter from './CategoryFilter';
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
-
+import { Route, Routes, useNavigate } from "react-router-dom";
+import chefhat from './chefhat.jpg';
 
 function App() {
   const navigate = useNavigate()
@@ -27,7 +27,14 @@ function App() {
     <div>
       <NavBar />
       <Routes>
-        <Route exact path="/" element={<h1>Landing Page</h1>} />
+        <Route exact path="/" element={
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "80vh" }}>
+            <div style={{ textAlign: "center" }}>
+              <h1 style={{ color: "red" }}>Find That Recipe</h1>
+              <img src={chefhat} alt="Landing Page" style={{ maxWidth: "100%", maxHeight: "50vh" }} />
+            </div>
+          </div>
+        } />
         <Route exact path="/browse" element={<CategoryFilter cats={cats} />} />
         <Route exact path="/newrecipe" element={<FoodForm cats={cats} />} />
         <Route exact path="/favorites" element={<FavoriteList />} />
