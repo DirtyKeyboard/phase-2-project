@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import LoadingBar from './LoadingBar';
 import RecipeCard from './RecipeCard';
-import { Card, Container, Header } from 'semantic-ui-react';
+import { Card, Container, Header, Message } from 'semantic-ui-react';
 
 const FavoriteList = () => {
   const API = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='

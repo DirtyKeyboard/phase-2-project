@@ -4,11 +4,12 @@ import RecipeCard from './RecipeCard'
 
 // class FoodForm extends Component {ss
 const FoodForm = ({ cats }) => {
+  const date = new Date();
 
   const categoryOptions = cats.map(el => ({ key: el.strCategory, text: el.strCategory, value: el.strCategory }))
 
   const [counter, setCounter] = useState(1);
-  const [formData, setFormData] = useState({ strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '' })
+  const [formData, setFormData] = useState({ strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: ''})
 
   function addFormFields(e) {
     e.stopPropagation()
@@ -32,6 +33,10 @@ const FoodForm = ({ cats }) => {
 
   function handleSubmit(e) {
     e.preventDefault()
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    let year = date.getFullYear()
+    let fullDate = `${month}-${day}-${year}`
     if (formData.strCategory !== '') {
       const API = 'http://localhost:4000/meals'
       async function fetchData() {
@@ -41,7 +46,7 @@ const FoodForm = ({ cats }) => {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify({...formData, strDateAdded: fullDate})
         };
         const raw = await fetch(API, settings)
         const data = await raw.json()

@@ -5,8 +5,10 @@ import RecipeList from './RecipeList';
 import RecipeDetails from './RecipeDetails';
 import FavoriteList from './FavoriteList';
 import CategoryFilter from './CategoryFilter';
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
-
+import { Route, Routes, useNavigate } from "react-router-dom";
+import LocalRecipes from './LocalRecipes'
+import LocalDetails from './LocalDetails'
+import Home from './Home'
 
 function App() {
   const navigate = useNavigate()
@@ -27,13 +29,15 @@ function App() {
     <div>
       <NavBar />
       <Routes>
-        <Route exact path="/" element={<h1>Landing Page</h1>} />
+        <Route exact path="/" element={<Home/>} />
         <Route exact path="/browse" element={<CategoryFilter cats={cats} />} />
         <Route exact path="/newrecipe" element={<FoodForm cats={cats} />} />
         <Route exact path="/favorites" element={<FavoriteList />} />
         <Route exact path="/browse/:categoryId" element={<RecipeList />} />
         <Route path="/browse/:categoryId/:mealId" element={<RecipeDetails setCurrentCat={setCurrentCat} goBack={() => navigate(`/browse/${currentCat}`)} />} />
         <Route path="/favorites/:mealId" element={<RecipeDetails setCurrentCat={(r) => { }} goBack={() => navigate(`/favorites`)} />} />
+        <Route exact path="/local" element={<LocalRecipes />}/>
+        <Route exact path="/local/:mealId" element={<LocalDetails />}/>
       </Routes>
     </div>
   );

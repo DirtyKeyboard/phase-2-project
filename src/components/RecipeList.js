@@ -4,24 +4,19 @@ import RecipeCard from './RecipeCard';
 import { Card, Form, Input, TextArea, Button, Container, Header } from 'semantic-ui-react'
 import LoadingBar from './LoadingBar'
 
-
 const RecipeList = () => {
 
   const { categoryId } = useParams()
   const [foods, setFoods] = useState([])
-  const [localFoods, setLocalFoods] = useState([])
   const [loading, setLoading] = useState(true);
   const API = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryId}`;
-  const LOCALDB = 'http://localhost:4000/meals'
   useEffect(() => {
     async function fetchData() {
       const localRaw = await fetch(LOCALDB)
       const localData = await localRaw.json()
-
       const raw = await fetch(API)
       const data = await raw.json()
       setFoods(data.meals)
-      setLocalFoods(localData)
       setLoading(false)
     }
     fetchData()
