@@ -56,20 +56,20 @@ const LocalDetails = () => {
         </>
         :
         <div className='container'>
-      <h1 className='bigHeading'>{info.strMeal}</h1>
+      <Header as='h1' textAlign='center'>{info.strMeal}</Header>
       <Image src={info.strMealThumb} alt={info.strMeal} centered/>
       <Button color='youtube' onClick={() => {setShowVideo(!showVideo)}}><Icon name='youtube' />{showVideo?'Hide':'Show'} Video</Button>
       <br />
       {showVideo ? <iframe width="420" height="315" src={getLink()} /> : null}
-      <h2>Region: {info.strArea}</h2>
-      <em><h4>Tags: {info.strTags ? info.strTags.replace(",",", ") : 'None'}</h4></em>
+      <Header as='h2'>Region: {info.strArea}</Header>
+      <em><Header as='h4'>Tags: {info.strTags ? info.strTags.replace(",",", ") : 'None'}</Header></em>
       <div>
         <Button onClick={goBack} color="red" icon labelPosition='left'>
           <Icon name='left arrow' />
           Go Back
         </Button>
       </div>
-      <Segment>
+      <Container textAlign='justified' text>
         <h4>Ingredients: </h4>
         <ul>
         {ingredients.map(el => {
@@ -79,7 +79,7 @@ const LocalDetails = () => {
       <Divider fitted />
       <h4>Instructions:</h4>
         <p>{info.strInstructions}</p>
-      </Segment>
+      </Container>
     </div>
             
         }
