@@ -1,14 +1,8 @@
 import React, { useState } from 'react'
-import {
-  Form,
-  Input,
-  TextArea,
-  Button,
-  Container,
-} from 'semantic-ui-react'
+import { Form, Input, TextArea, Button, Container, Header } from 'semantic-ui-react'
 import RecipeCard from './RecipeCard'
 
-// class FoodForm extends Component {
+// class FoodForm extends Component {ss
 const FoodForm = ({ cats }) => {
   const date = new Date();
 
@@ -78,7 +72,8 @@ const FoodForm = ({ cats }) => {
   }
 
   return (
-    <Container textAlign='left' verticalAlign='middle' style={{ margin: '7em 6em 0 6em', padding: '0 0 5em  0' }}  >
+    <Container textAlign='left' verticalAlign='middle' style={{ margin: '5em 6em 0 6em', padding: '0 0 5em  0' }}  >
+    <Header  as='h1'>Add a New Recipe</Header>
       <Form onSubmit={handleSubmit} size='large' >
         <Form.Field style={style.label}
           required
