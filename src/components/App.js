@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import NavBar from './NavBar'
+import Footer from './Footer';
 import FoodForm from './FoodForm';
 import RecipeList from './RecipeList';
 import RecipeDetails from './RecipeDetails';
@@ -39,6 +40,7 @@ function App() {
         <Route exact path="/local" element={<LocalRecipes />}/>
         <Route exact path="/local/:mealId" element={<LocalDetails />}/>
       </Routes>
+      <Footer/>
     </div>
   );
 }
