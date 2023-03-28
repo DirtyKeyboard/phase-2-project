@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Button, Image, Divider, Segment, Icon} from 'semantic-ui-react'
+import {Button, Image, Divider, Segment, Icon, Container, Header} from 'semantic-ui-react'
 import { useParams } from 'react-router-dom'
 import LoadingBar from './LoadingBar'
 import {v4 as uuidv4} from 'uuid';
@@ -90,14 +90,16 @@ const RecipeDetails = ({goBack, setCurrentCat}) => {
         </Button>
     </>
     : 
+    <Container verticalAlign='middle' style={{ margin: '5em 0 0 0', padding: '0 0 5em  0' }}  >
+   
     <div className='container'>
-      <h1 className='bigHeading'>{info.strMeal}</h1>
+      <Header as='h1' textAlign='center'>{info.strMeal}</Header>
       <Image src={info.strMealThumb} alt={info.strMeal} centered/>
       <Button color='youtube' onClick={() => {setShowVideo(!showVideo)}}><Icon name='youtube' />{showVideo?'Hide':'Show'} Video</Button>
       <br />
       {showVideo ? <iframe width="420" height="315" src={getLink()} /> : null}
-      <h2>Region: {info.strArea}</h2>
-      <em><h4>Tags: {info.strTags ? info.strTags.replace(",",", ") : 'None'}</h4></em>
+      <Header as='h2'>Region: {info.strArea}</Header>
+      <em><Header as='h4'>Tags: {info.strTags ? info.strTags.replace(",",", ") : 'None'}</Header></em>
       <div>
         {isThisAFavorite ?
         <Button onClick={handleFavorite} basic color="red" icon labelPosition='left'>
@@ -114,18 +116,19 @@ const RecipeDetails = ({goBack, setCurrentCat}) => {
           Go Back
         </Button>
       </div>
-      <Segment>
-        <h4>Ingredients: </h4>
+      <Container textAlign='justified' text>
+        <Header as='h4'>Ingredients: </Header>
         <ul>
         {ingredients.map(el => {
           return (<li key={uuidv4()}>{el}</li>)
           })}
         </ul>
       <Divider fitted />
-      <h4>Instructions:</h4>
+      <Header as='h4'>Instructions:</Header>
         <p>{info.strInstructions}</p>
-      </Segment>
+      </Container>
     </div>
+    </Container>
     }
     </>
   )
