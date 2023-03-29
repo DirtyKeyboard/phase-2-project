@@ -1,9 +1,9 @@
 import React from 'react'
-import { Card, Container, Header, Segment, Grid, List, Divider, Image } from 'semantic-ui-react'
+import { Container, Header, Segment, Grid, List } from 'semantic-ui-react'
 
 const Footer = () => {
     return (
-        <Segment inverted vertical style={{ padding: '2em 0 2em 0' }}>
+        <Segment inverted vertical style={{ padding: '5em 0 2em 0'}}>
             <Container textAlign='center'>
                 <Grid divided inverted  stackable  columns='equal'>
                     <Grid.Column >
