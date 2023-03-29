@@ -21,41 +21,41 @@ const FavoriteList = () => {
     }
     fetchData()
   }, [])
-  async function unFav(favId)
-  {
-    await fetch(`${DB}/${favId}`, {method:'DELETE'})
+  async function unFav(favId) {
+    await fetch(`${DB}/${favId}`, { method: 'DELETE' })
     const newData = data.filter(el => (el.id !== favId))
     setData(newData)
   }
   return (
-    <Container verticalAlign='middle' style={{ margin: '5em 0 0 0', padding: '0 0 5em  0' }}  >
+    <Container verticalAlign='middle' style={{ margin: '6em 0 2em 0', minHeight: "80vh" }}  >
       <Header as='h1' textAlign='left'>Favorites</Header>
-      {data.lenght === 0 ? 
-      <>
-      <Input type="text" icon="search" fluid placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)}/>
-      <Divider/>
-      </>
-      :
-      null}
-      
+      {data.lenght === 0 ?
+        <>
+          <Input type="text" icon="search" fluid placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />
+          <Divider />
+        </>
+        :
+        null}
+
 
       {loading ? <LoadingBar /> : null}
       <Card.Group centered itemsPerRow={4} stackable>
-        {loading ? null : 
+        {loading ? null :
 
-          search === "" ? 
-          data.map(el => (<FavoriteCard key={el.id} recipe={el} unFav={unFav}/>))
-          :
-          data.map(el => {
-            if (el.strMeal.toLowerCase().includes(search.toLowerCase()))
-            return <FavoriteCard key={el.id} recipe={el} unFav={unFav}/>})
+          search === "" ?
+            data.map(el => (<FavoriteCard key={el.id} recipe={el} unFav={unFav} />))
+            :
+            data.map(el => {
+              if (el.strMeal.toLowerCase().includes(search.toLowerCase()))
+                return <FavoriteCard key={el.id} recipe={el} unFav={unFav} />
+            })
         }
-         {data.length === 0 ? <Message>
-            <Message.Header>Nothing to show!</Message.Header>
-            <p>
-              It looks like you don't have any recipes favorited, to view our recipes, you can click <a href="/browse">here</a>
-            </p>
-          </Message>
+        {data.length === 0 ? <Message style={{ margin: '3em 0 0 0'}}>
+          <Message.Header>Nothing to show!</Message.Header>
+          <p>
+            It looks like you don't have any recipes favorited, to view our recipes, you can click <a href="/browse">here</a>
+          </p>
+        </Message>
           : null}
       </Card.Group>
     </Container>

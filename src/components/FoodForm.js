@@ -9,7 +9,7 @@ const FoodForm = ({ cats }) => {
   const categoryOptions = cats.map(el => ({ key: el.strCategory, text: el.strCategory, value: el.strCategory }))
 
   const [counter, setCounter] = useState(1);
-  const [formData, setFormData] = useState({ strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: ''})
+  const [formData, setFormData] = useState({ strMeal: '', strMealThumb: '', strYoutube: '', strTags: '', strArea: '', strCategory: '', strInstructions: '' })
 
   function addFormFields(e) {
     e.stopPropagation()
@@ -46,7 +46,7 @@ const FoodForm = ({ cats }) => {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({...formData, strDateAdded: fullDate})
+          body: JSON.stringify({ ...formData, strDateAdded: fullDate })
         };
         const raw = await fetch(API, settings)
         const data = await raw.json()
@@ -72,8 +72,8 @@ const FoodForm = ({ cats }) => {
   }
 
   return (
-    <Container textAlign='left' verticalAlign='middle' style={{ margin: '5em 6em 0 6em', padding: '0 0 5em  0' }}  >
-    <Header  as='h1'>Add a New Recipe</Header>
+    <Container textAlign='left' verticalAlign='middle' style={{ margin: '6em 0 2em 0', minHeight: "80vh" }}  >
+      <Header as='h1'>Add a New Recipe</Header>
       <Form onSubmit={handleSubmit} size='large' >
         <Form.Field style={style.label}
           required
@@ -177,9 +177,9 @@ const FoodForm = ({ cats }) => {
         <Button type='submit' style={{ marginBottom: '0.5em' }}>Submit</Button>
       </Form>
 
-      <div>
-        <RecipeCard recipe={formData} handleClick={() => console.log('Clicked demo card!')} />
-      </div>
+      {/* <div>
+        <RecipeCard recipe={formData} handleClick={null} />
+      </div> */}
     </Container >
 
   )
