@@ -10,7 +10,7 @@ const Footer = () => {
                         <Header inverted as='h4' content='About the Developers' />
                         <List link inverted>
                             <List.Item as='a' href="https://github.com/DirtyKeyboard">Andrew Hawileh</List.Item>
-                            <List.Item as='a' href="hhttps://github.com/jordandc20">Diana Jordan</List.Item>
+                            <List.Item as='a' href="https://github.com/jordandc20">Diana Jordan</List.Item>
                             <List.Item as='a' href="https://github.com/joshuathawke">Joshua Hawke</List.Item>
                         </List>
                     </Grid.Column>
