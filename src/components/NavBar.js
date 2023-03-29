@@ -8,9 +8,8 @@ const NavBar = () => {
 
     <Menu fixed='top' inverted>
       <Container>
-        <Menu.Item as='a'  >
+        <Menu.Item as='div'>
           <Image size='mini'src={chefhatIcon}  style={{ marginRight: '1.5em' }} />
-
         </Menu.Item>
         <Menu.Item as={NavLink} exact to="/" activeClassName="active">Home</Menu.Item>
         <Menu.Item as={NavLink} exact to="/browse" activeClassName="active">Browse Recipes</Menu.Item>

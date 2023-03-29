@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Form, Input, TextArea, Button, Container, Header } from 'semantic-ui-react'
 import RecipeCard from './RecipeCard'
 
-// class FoodForm extends Component {ss
 const FoodForm = ({ cats }) => {
   const date = new Date();
 
@@ -40,14 +39,29 @@ const FoodForm = ({ cats }) => {
     if (formData.strCategory !== '') {
       const API = 'http://localhost:4000/meals'
       async function fetchData() {
-        const settings = {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ ...formData, strDateAdded: fullDate })
-        };
+        let settings = {};
+        if (formData.strMealThumb === '')
+        {
+          settings = {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ...formData, strDateAdded: fullDate, strMealThumb: "https://i.stack.imgur.com/aEEkn.png" })
+          };
+        }
+        else
+        {
+           settings = {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ...formData, strDateAdded: fullDate })
+          };
+        }
         const raw = await fetch(API, settings)
         const data = await raw.json()
         return data
