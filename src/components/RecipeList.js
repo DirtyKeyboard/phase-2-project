@@ -21,22 +21,21 @@ const RecipeList = () => {
     fetchData()
   }, [])
 
-  function handleSearch(e)
-  {
-      setSearch(e.target.value)
+  function handleSearch(e) {
+    setSearch(e.target.value)
   }
   return (
-    <Container verticalAlign='middle' style={{ margin: '5em 0 0 0', padding: '0 0 5em  0' }}  >
+    <Container verticalAlign='middle' style={{ margin: '6em 0 2em 0', minHeight: "80vh" }} >
 
       <Header as='h1' textAlign='left'>Browsing All: {categoryId}</Header>
-      <Input fluid type="text" icon="search" placeholder="Search..." onChange={handleSearch} value={search}/>
+      <Input fluid type="text" icon="search" placeholder="Search..." onChange={handleSearch} value={search} />
       <Divider />
       {loading ? <LoadingBar /> :
         <Card.Group centered itemsPerRow={4} stackable>
-          {search==="" ? foods.map(el => (<RecipeCard key={el.idMeal} recipe={el} />)) : 
-          foods.map(el => {
+          {search === "" ? foods.map(el => (<RecipeCard key={el.idMeal} recipe={el} />)) :
+            foods.map(el => {
               if (el.strMeal.toLowerCase().includes(search.toLowerCase()))
-               return <RecipeCard key={el.idMeal} recipe={el} />
+                return <RecipeCard key={el.idMeal} recipe={el} />
             })}
         </Card.Group>
       }
